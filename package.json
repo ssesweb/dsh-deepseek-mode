@@ -1,6 +1,6 @@
 {
   "name": "dsh-deepseek-mode",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek web-style mode for DeepSeek Harness: composer toggles (deep think, web search), a DeepSeek agent preset, and per-session web-search gating.",
   "keywords": [
     "dsh",
@@ -13,6 +13,14 @@
   ],
   "license": "MIT",
   "author": "Tong Li (QuietPhoenix)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssesweb/dsh-deepseek-mode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ssesweb/dsh-deepseek-mode/issues"
+  },
+  "homepage": "https://github.com/ssesweb/dsh-deepseek-mode#readme",
   "type": "module",
   "exports": {
     ".": "./index.js",
