@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "DeepSeek mode",
+    "description": "Adds DeepSeek web-style composer toggles (deep think, web search) and a DeepSeek agent preset; web search is gated per session."
+  }
+}

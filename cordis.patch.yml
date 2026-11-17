@@ -1,0 +1,65 @@
+# Agent preset deepseek + host gate + client toggles.
+- insert:
+    - id: dsw-search-gate
+      name: 'dsh-deepseek-mode'
+      config: {}
+    - id: preset-deepseek
+      name: '@deepseek-ai/dsh-agent-preset'
+      config:
+        id: deepseek
+        name: DeepSeek
+        description: DeepSeek 网页版对齐模式：官方身份与语气，联网搜索按输入框开关放行。
+        order: 5
+        plugins:
+          - id: persona
+            name: '@deepseek-ai/dsh-persona'
+            config:
+              prefix: >-
+                你是 DeepSeek，由深度求索公司创造的 AI 助手。默认中文回答；用户用其他语言时用该语言。
+                直接回答问题本身：不复述问题、不写开场白、不用"好的""当然"这类填充语。
+                风格白描短句、信息密度高，不堆形容词，不喊口号。涉及事实与时效内容时,
+                只有当本会话的联网搜索开关已开启（工具可正常调用）才检索核实并附来源链接;
+                若 web_search 被拒绝, 说明当前未开启联网搜索, 按既有知识回答并注明时效限制。
+                除非用户明确要求, 不主动读写本地文件、不执行命令。
+          - id: agent-instructions
+            name: '@deepseek-ai/dsh-agent-instructions'
+            config:
+              maxBytes: 65536
+          - id: time-context
+            name: '@deepseek-ai/dsh-time-context'
+          - id: tool-fs
+            name: '@deepseek-ai/dsh-tool-fs'
+            config:
+              applyPatch: false
+          - id: tool-fs-search
+            name: '@deepseek-ai/dsh-tool-fs-search'
+            config:
+              sampleOverCapGlobResults: false
+          - id: tool-web
+            name: '@deepseek-ai/dsh-tool-web'
+            config:
+              fetch: true
+              searchTimeoutMs: 60000
+          - id: tool-ask-user
+            name: '@deepseek-ai/dsh-tool-ask-user'
+          - id: present
+            name: '@deepseek-ai/dsh-tool-present'
+          - id: tool-office
+            name: '@deepseek-ai/dsh-tool-office'
+          - id: compaction
+            name: cordis:group
+            group: true
+            isolate:
+              compaction: true
+              toolResultPruner: true
+            config:
+              - id: compaction-basic
+                name: '@deepseek-ai/dsh-compaction-basic'
+              - id: command-compact
+                name: '@deepseek-ai/dsh-command-compact'
+              - id: tool-result-pruner
+                name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
+                config:
+                  thresholdChars: 8192
+                  headChars: 4096
+                  tailChars: 1024
